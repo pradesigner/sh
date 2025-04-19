@@ -1,0 +1,104 @@
+******************************************************************
+NAME:
+DBclose - closes a database
+SYNTAX:
+voidDBclose(fdesc)
+DBFILE *fdesc;
+fdesc- pointer to database file descriptor
+USAGE:
+DESC:
+DBclose() closes a file when given its database file descriptor.
+Your pending writes to that file will be completed before the
+file is closed. All of your update locks are removed.
+*fdesc becomes invalid.
+Other users are not affected when you call DBclose(). Their update
+locks and pending writes are not changed.
+Note that there is no default file as there is in BASIC.
+*fdesc must specify an open file.
+DBclose() is analogous to the CLOSE statement in BASIC.
+RETURNS:
+There is no return value
+******************************************************************
+
+
+Put \n after and before *lines
+sed -e '1a \\n' -e '$i \\n' doc.txt -i
+this puts 2 lines in for some reason.
+
+******************************************************************
+
+
+NAME:
+DBclose - closes a database
+SYNTAX:
+voidDBclose(fdesc)
+DBFILE *fdesc;
+fdesc- pointer to database file descriptor
+USAGE:
+DESC:
+DBclose() closes a file when given its database file descriptor.
+Your pending writes to that file will be completed before the
+file is closed. All of your update locks are removed.
+*fdesc becomes invalid.
+Other users are not affected when you call DBclose(). Their update
+locks and pending writes are not changed.
+Note that there is no default file as there is in BASIC.
+*fdesc must specify an open file.
+DBclose() is analogous to the CLOSE statement in BASIC.
+RETURNS:
+There is no return value
+
+
+******************************************************************
+
+Delete from a line to the end
+sed -i '22,$d' doc.txt
+
+******************************************************************
+NAME:
+DBclose - closes a database
+SYNTAX:
+voidDBclose(fdesc)
+DBFILE *fdesc;
+fdesc- pointer to database file descriptor
+USAGE:
+DESC:
+DBclose() closes a file when given its database file descriptor.
+Your pending writes to that file will be completed before the
+file is closed. All of your update locks are removed.
+*fdesc becomes invalid.
+Other users are not affected when you call DBclose(). Their update
+locks and pending writes are not changed.
+Note that there is no default file as there is in BASIC.
+*fdesc must specify an open file.
+DBclose() is analogous to the CLOSE statement in BASIC.
+RETURNS:
+There is no return value
+******************************************************************
+
+
+Remove the line beginning with There
+sed '/^There/d' doc.txt
+
+******************************************************************
+NAME:
+DBclose - closes a database
+SYNTAX:
+voidDBclose(fdesc)
+DBFILE *fdesc;
+fdesc- pointer to database file descriptor
+USAGE:
+DESC:
+DBclose() closes a file when given its database file descriptor.
+Your pending writes to that file will be completed before the
+file is closed. All of your update locks are removed.
+*fdesc becomes invalid.
+Other users are not affected when you call DBclose(). Their update
+locks and pending writes are not changed.
+Note that there is no default file as there is in BASIC.
+*fdesc must specify an open file.
+DBclose() is analogous to the CLOSE statement in BASIC.
+RETURNS:
+******************************************************************
+
+Replace :\n with :\t

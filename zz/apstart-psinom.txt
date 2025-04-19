@@ -1,0 +1,55 @@
+#!/usr/bin/sh
+
+## apstart.sh for psinom
+
+## leftwm
+## startup apps in tags
+## usage: jri
+
+# for some reason, we start in tag 1 (even though it should be 2)
+# so we don't set_desktop, then set 1->2, 2->3, etc
+
+browser="vivaldi-stable"
+emacser="emacsclient -c"
+sleeper="sleep 2"
+
+## rg
+#xdotool set_desktop 0
+rosegarden                                      \
+&
+$sleeper
+
+## praduction
+xdotool set_desktop 1
+$browser --new-window                           \
+https://fountain.io/syntax                      \
+https://www.rhymer.com                          \
+https://www.thesaurus.com                       \
+&
+$sleeper
+$emacser                                        \
+~/honor/AAlib.fountain                          \
+~/tryangles/AAlib.fountain                      \
+&
+$sleeper
+
+## yoshimi, pipewire
+xdotool set_desktop 7
+qpwgraph                                        \
+&
+$sleeper
+alacritty -e "yoshimi"                          \
+&
+$sleeper
+
+## docs
+xdotool set_desktop 8
+$browser --new-window                               \
+https://www.rosegardenmusic.com/doc/en/index.html   \
+https://yoshimi.sourceforge.io/docs/user-guide/     \
+&
+$sleeper
+
+
+exit
+

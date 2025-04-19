@@ -1,0 +1,12 @@
+# Assisted by https://www.toptal.com/developers/gitignore/
+
+### Default ###
+*.jar
+*.class
+.cache/
+.config/
+mail/
+\#*
+~*
+
+# End 

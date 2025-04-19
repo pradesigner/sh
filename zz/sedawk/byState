@@ -1,0 +1,16 @@
+#!/usr/bin/sh
+
+# byState example
+# usage: na
+# indenting is very bad on this may be because we are awking?
+
+
+awk -F, '{print $4 ", " $0}'  |
+sort |
+awk -F, '
+$1 == LastState {print "\t" $2}
+$1 != LastState {
+LastState = $1
+print $1
+print "\t" $2
+}'

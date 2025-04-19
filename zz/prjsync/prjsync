@@ -1,0 +1,83 @@
+#!/usr/bin/env zsh
+
+######################################################################
+# praject rsync                                                      #
+#                                                                    #
+# AUTH: pradesigner                                                  #
+# VDAT: v1 - 2023-07-01                                              #
+# PURP: rsyncs prajects to lentil                                    #
+#                                                                    #
+# prjsync.sh rsyncs entire prajects to lentil dirs. The script works #
+# well, and is preferable to git for the purposes of making backups. #
+# Log is always kept in the zzotes.org file at the top usually.      #
+######################################################################
+
+
+########
+# Help #
+########
+if [[ $1 == '-h' ]]; then
+    echo "use: uses rsync to backup specific prajects to lentil"
+    echo "how: prjsync.sh praductions|aa|sh u|d"
+    exit
+fi
+
+
+
+#############
+# Variables #
+#############
+if [[ -z $1 || -z $2 ]]; then
+    echo "usage: prjsync.sh <PRAJECTNAME> u|d"
+    exit
+fi
+
+# check that there is a praject directory for the praject name
+# prajects are always linked from ~/
+if [[ -d ~/$1 ]]; then
+    PD=$1 #praject directory    
+else
+    echo "praject directory does not exist!"
+    exit
+fi
+
+UD=$2                           # u|d
+
+
+
+########
+# Main #
+########
+#set the dirs for u|d
+case $UD in
+    u) 
+        FRD=$PD/
+        TOD=lentil:prajects/$PD/
+        emacsclient -nw ~/$PD/zzlog.org # make entries in log
+        ;;
+    d)
+        FRD=lentil:prajects/$PD/
+        TOD=$PD
+        ;;
+    *)
+        echo "usage: u|d"
+        exit
+        
+esac
+
+
+#rsync the praject
+rsync -av --update --delete --exclude-from="$HOME/sh/prjxclude" $FRD $TOD
+
+echo done
+
+exit
+
+
+
+#########
+# Notes #
+#########
+
+
+# script may be of use for several situations and should probably be improved !!!
