@@ -5,8 +5,5 @@ if [[ -e $s ]];do
 done
 
 
-
-
-
     
     

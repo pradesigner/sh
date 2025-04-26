@@ -18,28 +18,33 @@
 ########
 if [[ $1 == '-h' ]]; then
     echo "use: recollindexer for various directory contents"
-    echo "how: jri"
+    echo "how: recoll-indexer.sh [full]"
     exit
 fi
+
+
+
+#############
+# Variables #
+#############
+if [[ "$1" == "full" ]]; then
+    OPT="-z"
+else
+    OPT=""
+fi
+
+DIRS=(ai compsci distec math music nutritionfacts philosophy physics pp program tax trading zitems)
 
 
 
 ########
 # Main #
 ########
-recollindex
-recollindex -c ~/.recoll/ai
-recollindex -c ~/.recoll/compsci
-recollindex -c ~/.recoll/distec
-recollindex -c ~/.recoll/math
-recollindex -c ~/.recoll/music
-recollindex -c ~/.recoll/nutritionfacts
-recollindex -c ~/.recoll/philosophy
-recollindex -c ~/.recoll/physics
-recollindex -c ~/.recoll/program
-recollindex -c ~/.recoll/tax
-recollindex -c ~/.recoll/trading
-recollindex -c ~/.recoll/zitems
+
+for d in $DIRS; do
+    echo "=== INDEXING $d $OPT ==="
+    recollindex -c ~/.recoll/$d $OPT #-m -v 2>&1 | tee ~/recoll-$d.log
+done
 
 
 exit
