@@ -19,7 +19,7 @@
 ########
 if [[ $1 == '-h' ]]; then
     echo "use: Create a new CLJ project."
-    echo "how: nucljprj.sh <PRJ name>"
+    echo "how: nucljprj.sh <PRJ>"
     exit
 fi
 
@@ -61,27 +61,28 @@ cat <<EOF > deps.edn
  {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.4" :git/sha "76b78fe"}}
           :ns-default build}
   :test {:extra-paths ["test"]
-         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}}}
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}
+  :run {:main-opts ["-m" "$PRJ.core"]}}}
 EOF
 
 
-# create README.org
-cat <<EOF > README.org
+# create README.md
+cat <<EOF > README.md
 $PRJ
 
 abstract
 
-* Description
+# Description
 
-* Installation
+# Installation
 
-* Usage
+# Usage
 
-* Configuration
+# Configuration
 
-* Testing
+# Testing
 
-* License
+# License
   Program is copyleft. All items are created by pradesigner often with help from perplexity AI, unless otherwise credited.
 EOF
 
@@ -108,7 +109,7 @@ cat << EOF > build.clj
   (b/uber {:class-dir class-dir
            :uber-file uber-file
            :basis basis
-           :main '$PROJECT_NAME.core}))
+           :main '$PRJ.core}))
 EOF
 
 
@@ -116,8 +117,8 @@ EOF
 mkdir -p test/$PRJ src/$PRJ resources docs
 
 
-# create docs/README.org
-cat <<EOF > docs/README.org
+# create docs/README.md
+cat <<EOF > docs/README.md
 Any extra documentation is placed in this directory.
 
 EOF
@@ -140,10 +141,11 @@ EOF
 
 # create the core file
 cat << EOF > src/$PRJ/core.clj
-(ns $PROJECT_NAME.core)
+(ns $PRJ.core
+  (:require [clojure.string :as str]))
 
 (defn -main [& args]
-  (println "Hello, World!"))
+  (println "Hello, World!" (str/join " " args)))
 EOF
 
 

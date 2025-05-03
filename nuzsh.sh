@@ -18,7 +18,7 @@
 # Help #
 ########
 if [[ $1 == '-h' ]]; then
-    echo "use: creates new zsh script (default aaa.sh)"
+    echo "use: creates new zsh script in ~sh (default aaa.sh)"
     echo "how: nuzsh.sh [dir/]<name>"
     exit
 fi
@@ -45,7 +45,7 @@ tmplfile=~/sh/zztmpls/zshtmpl.sh
 cd $shdir
 cp $tmplfile $name
 chmod +x $name
-exit
+
 ln -s $(pwd)/$name ~/bin/$name  # make symlnk
 
 emacsclient -c $name &          # spawns bg process
