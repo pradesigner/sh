@@ -48,6 +48,13 @@ esac
 ########
 # Main #
 ########
+
+## add README.md
+cp ~/ocs/esign/prg/zztmpls/README.md .
+sed -i "s/PRJ/$NAME/" README.md
+cat README.md
+
+## setup on git
 git init
 git add .
 git commit -m "Initial commit: Add base files"

@@ -19,7 +19,7 @@
 ########
 if [[ $1 == '-h' ]]; then
     echo "use: Create a new CLJ project."
-    echo "how: nucljprj.sh <PRJ>"
+    echo "how: nucljprj.sh <PRJ> [pri|pub]"
     exit
 fi
 
@@ -29,18 +29,27 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-
+    
 
 #############
 # Variables #
 #############
 PRJ=$1
 
-
-
-#############
-# Functions #
-#############
+case $2 in
+    pri )
+        echo "Repo visibility is private."
+        VIS="--private"        
+        ;;
+    pub )
+        echo "Repo visibility is public."
+        VIS="--public"
+        ;;
+    *)
+        echo "Repo visibility is public."
+        VIS="--public"
+        ;;
+esac
 
 
 
@@ -51,6 +60,11 @@ PRJ=$1
 # create prj directory
 mkdir ~/clj/$PRJ
 cd ~/clj/$PRJ
+
+## add README.md
+cp ~/ocs/esign/prg/zztmpls/README.md .
+sed -i "s/PRJ/$NAME/" README.md
+cat README.md
 
 
 # create deps.edn
@@ -63,27 +77,6 @@ cat <<EOF > deps.edn
   :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}}}
   :run {:main-opts ["-m" "$PRJ.core"]}}}
-EOF
-
-
-# create README.md
-cat <<EOF > README.md
-$PRJ
-
-abstract
-
-# Description
-
-# Installation
-
-# Usage
-
-# Configuration
-
-# Testing
-
-# License
-  Program is copyleft. All items are created by pradesigner often with help from perplexity AI, unless otherwise credited.
 EOF
 
 
@@ -165,6 +158,9 @@ pom.xml.asc
 .hgignore
 .hg/
 .cpcache/
+.lsp/
+.clj-kondo/*
+!.clj-kondo/config.edn
 EOF
 
 
@@ -173,7 +169,7 @@ git init
 git add .
 git commit -m "Initial commit: Add base files"
 git branch -M main
-gh repo create pradesigner/$PRJ --public --source=. --remote=origin
+gh repo create pradesigner/$PRJ $VIS --source=. --remote=origin
 git push -u origin main
 
 

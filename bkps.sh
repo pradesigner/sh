@@ -4,6 +4,7 @@
 # Backups                                                         #
 #                                                                 #
 # AUTH: pradesigner                                               #
+# VDAT: v2 - <2025-05-11 Sun> (tumbleweed setup)                  #
 # VDAT: v1 - <2023-07-31 Mon> (started before 2018)               #
 # PURP: does various backups                                      #
 #                                                                 #
@@ -18,7 +19,7 @@
 ########
 if [[ $1 == '-h' ]]; then
     echo "use: makes backups given an argument"
-    echo "how: bkps.sh <pradmin|av|1|12|sd>"
+    echo "how: bkps.sh <pradir|4T|4T4T|sd>"
     exit
 fi
 
@@ -34,36 +35,35 @@ arg=$1                          # parameter indicating which backup to do
 # Main #
 ########
 case $arg in
-    pradmin)
+    pradir)
         # /home/pradmin to /zata/pradmin
         echo 'rsyncing to /zata/pradmin'
-        rsync -aW --inplace --exclude={'.cache/','.git/'} --delete /home/pradmin /zata/
+        rsync -a --exclude={'.cache/','.git/'} --delete /home/pradmin /zata/
         ;;
-    av)
-        # av items to /zata
-        rsync -rW --inplace --delete /home/xxx/zzhold /zata/xxx/
-        rsync -rW --inplace --delete /home/vids /zata/
-        ;;
-    1)
+    4T)
         # backup pradmin, xxx to bkp1 (4T)
         #user=`id -u -n`
         #host=`hostname`
         echo 'backing up to 4T'
-        sudo mount /dev/disk/by-uuid/334ec2f2-56f3-411d-ab04-429b5dc00ad2 /home/mnts/bkp1
-        rsync -av --exclude={'.cache/','.git/'} --delete /home/pradmin /home/mnts/bkp1/
-        rsync -av --delete /home/xxx /home/mnts/bkp1/av/
-        sudo umount /home/mnts/bkp1
+        sudo mkdir /mnt/4T
+        sudo mount /dev/disk/by-uuid/334ec2f2-56f3-411d-ab04-429b5dc00ad2 /mnt/4T
+        rsync -a --exclude={'.cache/','.git/'} --delete /home/pradmin /mnt/4T/
+        rsync -a --delete /zata/srv/xxx /mnt/4T/av/
+        sudo umount /mnt/4T
+        sudo rmdir /mnt/4T
         ;;
-    12)
+    4T4T)
         # backup bkp1 to bkp2 (both 4T)
         echo "backing up 4T bkp1 to 4T bkp2"
-        sudo mount /dev/disk/by-uuid/334ec2f2-56f3-411d-ab04-429b5dc00ad2 /home/mnts/bkp1
-        sudo mount /dev/disk/by-uuid/ba2b8254-12e0-4765-97c4-c95f81ad340a /home/mnts/bkp2
-        rsync -av --delete /home/mnts/bkp1/av /home/mnts/bkp2/
-        rsync -av --delete /home/mnts/bkp1/bkps /home/mnts/bkp2/
-        rsync -av --delete /home/mnts/bkp1/pradmin /home/mnts/bkp2/
-        sudo umount /home/mnts/bkp1
-        sudo umount /home/mnts/bkp2
+        sudo mkdir /mnt/4T{1,2}
+        sudo mount /dev/disk/by-uuid/334ec2f2-56f3-411d-ab04-429b5dc00ad2 /mnt/4T1
+        sudo mount /dev/disk/by-uuid/ba2b8254-12e0-4765-97c4-c95f81ad340a /mnt/4T2
+        rsync -a --delete /mnt/4T1/av /mnt/4T2/
+        rsync -av --delete /mnt/4T1/bkps /mnt/4T2/
+        rsync -av --delete /mnt/4T1/pradmin /mnt/4T2/
+        sudo umount /mnt/4T1
+        sudo umount /mnt/4T2
+        sudo rmdir /mnt/4T?
         ;;
     sd)
         # backup ~/ocs to sdcard mounted with adapter (don't have 4T on)
@@ -79,7 +79,7 @@ case $arg in
         ;;
     *)
         echo 'stop messing it up!'
-        echo 'usage: bkps.sh <pradmin|av|1|12|sd>'
+        echo 'try bkps.sh -h'
         ;;
 
 esac
@@ -96,12 +96,8 @@ exit
 # Notes #
 #########
 
-    # xxx)
-    #     # xxx directory to usb stick NOLONGER USED
-    #     sudo mount /dev/disk/by-uuid/6A5D-C350 /home/mnts
-    #     sudo rsync -vrl --delete --exclude='zzhold' /home/xxx /home/mnts/
-    #     sudo umount /home/mnts
-    #     ;;
+modify 4T to follow jellyfin pattern of movies, shows, music etc.
+this will require some thought.
 
 
 

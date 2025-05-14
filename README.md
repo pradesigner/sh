@@ -1,14 +1,19 @@
-# Overview
-There are a collection of zsh scripts here.
+# zsh scripts
+This is a collection of zsh scripts here accessible through ~sh and symlinked into ~/bin when appropriate.
 
-# History
+## Description
 We have created zsh scripts for many years now. We plan to have a zsh resource illustrating various
 techniques at some point.
 
-# Authorship and Contributors
-All scripts written by pradesigner.
+## Installation
+NA.
 
-# Technical Details
+## Usage
+Scripts have a -h flag which shows  
+use:  
+how:
+
+## Technical Details
 We use the following template for all zsh scripts of any significance.
 
 ```
@@ -65,7 +70,7 @@ exit
 Use -h to find out what each does or do a bat on the script to get more
 detail.
 
-Most of the scripts are linked to \~/bin/ for use.
+Most of the scripts are linked to ~/bin/ for use.
 
 Specialized scripts are collected in an appropriate dir.
 
@@ -78,3 +83,6 @@ There is a zztmpls link to ocs/esign/prg/zztmpls/ which contains a
 zshtmpl.sh providing a blank annotated template to start scripts with.
 
 There will be more work done on this README as we progress.
+
+## License
+Program is copyleft. All items are created by pradesigner often with help from perplexity AI, unless otherwise credited.
