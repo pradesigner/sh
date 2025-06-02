@@ -17,7 +17,7 @@
 # Help #
 ########
 if [[ $1 == '-h' ]]; then
-    echo "use: recollindexer for various directory contents"
+    echo "use: recollindexer for all recoll directory contents, full flag renews"
     echo "how: recoll-indexer.sh [full]"
     exit
 fi
