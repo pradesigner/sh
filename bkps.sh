@@ -19,7 +19,7 @@
 ########
 if [[ $1 == '-h' ]]; then
     echo "use: makes backups given an argument"
-    echo "how: bkps.sh <pradir|4T|4T4T|sd>"
+    echo "how: bkps.sh [<4T|4T4T|sd>] || pradmin"
     exit
 fi
 
@@ -35,11 +35,6 @@ arg=$1                          # parameter indicating which backup to do
 # Main #
 ########
 case $arg in
-    pradir)
-        # /home/pradmin to /zata/pradmin
-        echo 'rsyncing to /zata/pradmin'
-        rsync -a --exclude={'.cache/','.git/'} --delete /home/pradmin /zata/
-        ;;
     4T)
         # backup pradmin, xxx to bkp1 (4T)
         #user=`id -u -n`
@@ -78,8 +73,9 @@ case $arg in
         sudo umount /home/mnts/sd
         ;;
     *)
-        echo 'stop messing it up!'
-        echo 'try bkps.sh -h'
+        # /home/pradmin to /zata/pradmin
+        echo 'rsyncing to /zata/pradmin'
+        rsync -a --exclude={'.cache/','.git/'} --delete /home/pradmin /zata/
         ;;
 
 esac

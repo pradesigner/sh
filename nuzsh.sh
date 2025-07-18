@@ -7,7 +7,7 @@
 # VDAT: v1 - <2023-08-14 Mon>                                             #
 # PURP: creates a new zsh script                                          #
 #                                                                         #
-# nuzsh.sh makes a new zsh script using the ~/sh/zshtmpl.sh template. It  #
+# nuzsh.sh makes a new zsh script using the ~/ss/zshtmpl.sh template. It  #
 # copies file to the name provided in the first argument, sets up the     #
 # symlnk in bin, opens it in emacs for editing, then exits.               #
 ###########################################################################
@@ -34,8 +34,8 @@ else
     name=${1%%.*}.sh            # make sure there is only one extension
 fi
 
-shdir=~/sh
-tmplfile=~/sh/zztmpls/zshtmpl.sh
+shdir=~/ss
+tmplfile=~/ss/zztmpls/zshtmpl.sh
 
 
 

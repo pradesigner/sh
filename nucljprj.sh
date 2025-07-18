@@ -19,7 +19,7 @@
 ########
 if [[ $1 == '-h' ]]; then
     echo "use: Create a new CLJ project."
-    echo "how: nucljprj.sh <PRJ> [pri|pub]"
+    echo "how: nucljprj.sh <PRJ> [pri|pub] (from anywhere)"
     exit
 fi
 
