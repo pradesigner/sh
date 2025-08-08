@@ -37,8 +37,8 @@ HOSTNAME=$1
 INTERFACE=$2
 SOFTWARE=$3
 
-ROOT=asonetuh
-PRAD=sanotehu
+ROOT=et
+PRAD=tu
 
 
 #############
